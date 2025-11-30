@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers( "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/products").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST,"/products/**").hasRole("USER")
 
                         .anyRequest().authenticated()
                 ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -54,5 +54,12 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
 
     }
+
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+    }
+
 
 }
