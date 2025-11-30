@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -43,7 +44,7 @@ public class ProductService {
         repository.save(products);
         return products;
     }
-    private String getUserid(){
+    private UUID getUserid(){
 
             String username = SecurityContextHolder.getContext()
                     .getAuthentication()

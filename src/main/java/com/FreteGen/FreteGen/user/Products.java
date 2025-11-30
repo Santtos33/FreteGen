@@ -21,9 +21,9 @@ public class Products {
     @GeneratedValue
     private UUID id;
 
-    // FK → users.id
+
     @Column(name = "user_id", nullable = false)
-    private String userId;
+    private UUID userId;
 
     @Column(nullable = false, length = 150)
     private String name;

@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.UUID;
+
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +19,9 @@ import java.util.Collection;
 @Getter
 public class Clients implements UserDetails {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String login;
 
@@ -44,4 +45,9 @@ public class Clients implements UserDetails {
     public String getUsername() {
         return login;
     }
+
+    public UUID getUserId() {
+        return this.id;
+    }
+
 }
